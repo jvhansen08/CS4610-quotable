@@ -1,0 +1,18 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.quoteBox {
+  color: black;
+  background-color: antiquewhite;
+  height: fit-content;
+  padding: 5%;
+  border-radius: 15px;
+}
+
+.author {
+  text-align: end;
+}
