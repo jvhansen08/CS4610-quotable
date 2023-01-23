@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  overflow-y: scroll;
 }
 
 .quoteBox {
@@ -17,8 +18,7 @@
   text-align: end;
 }
 
-.firstTime {
-  height: 100vh;
-  align-items: center;
-  display: flex;
+#searchBar {
+  width: 70vw;
+  border-radius: 25px;
 }

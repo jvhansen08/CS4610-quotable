@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { Quote } from "../interfaces"
 
 export function Quotebox(props: Quote) {
