@@ -1,24 +1,45 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
-  overflow-y: scroll;
+  background-color:rgb(255, 219, 168);
 }
 
-.quoteBox {
+.quote {
   color: black;
-  background-color: antiquewhite;
   height: fit-content;
   padding: 5%;
   border-radius: 15px;
+  background-color: antiquewhite;
+
+}
+.quoteBox {
+  color: black;
+  height: fit-content;
+  padding: 1%;
+  border-radius: 15px;
+  text-align: start;
 }
 
 .author {
   text-align: end;
 }
 
-#searchBar {
-  width: 70vw;
-  border-radius: 25px;
+#searchIcon {
+  width: 10px;
+  height: 10px;
+  outline: none;
+  
+}
+
+.wrapper {
+  width: 100%;
+  text-align: center;
+  display: flex;
+}
+
+input {
+  border-radius: 20px;
+  width: 100%;
+  display: block;
 }

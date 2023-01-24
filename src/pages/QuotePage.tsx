@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { Quotebox } from "../components/Quotebox";
 import { Quote } from "../interfaces";
 import { Searchbar } from "../components/Searchbar";
-
+import { SearchButton } from "../components/SearchButton";
+import { Header } from "../components/Header";
 
 export function QuotePage() {
     const [firstTime, setTime] = useState(true);
@@ -11,6 +12,18 @@ export function QuotePage() {
 
     useEffect(() => {
         getQuote()
+        const searchBar = document.getElementById("searchBar") as HTMLInputElement;
+        searchBar.addEventListener("keypress", (event) => {
+            if (event.key === "Enter") {
+                const button = document.getElementById("searchButton") as HTMLInputElement;
+                button.click();
+            }
+        const searchButton = document.getElementById("searchButton") as HTMLButtonElement;
+        searchButton.addEventListener("click", () => {
+            setTime(false);
+            getSearchedQuote()
+            });
+        });
     }, []);
   
     async function getQuote() {
@@ -26,7 +39,6 @@ export function QuotePage() {
             let quotes = await fetch(`https://usu-quotes-mimic.vercel.app/api/search?query=${query}`)
             .then((res) => res.json())
             .then((json) => json.results);
-        console.log(quotes);
         setQuotes(quotes);
         }
     }
@@ -35,18 +47,10 @@ export function QuotePage() {
         <div className="firstTime">
             { firstTime &&
             <div >
-                <div>
-                    <span>
-                        <Searchbar />
-                        <button 
-                                onClick={() => {
-                                    setTime(false);
-                                    getSearchedQuote()
-                                }                        
-                            }>click me
-                        </button>
-                    </span>
-                    
+                <Header />
+                <div className="wrapper">
+                    <Searchbar />
+                    <SearchButton />
                 </div>
                 <div>
                     <Quotebox author={quote.author} content={quote.content} _id={""} />
@@ -55,8 +59,12 @@ export function QuotePage() {
             }
             { !firstTime &&
                 <div>
-                    <div>
+                    <div className="wrapper">
+                        <span>
                         <Searchbar />
+                        <SearchButton />
+                        </span>
+                        
                     </div>
                     <div>
                         {

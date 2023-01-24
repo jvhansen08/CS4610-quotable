@@ -4,12 +4,15 @@ export function Quotebox(props: Quote) {
     
     return (
         <div className="quoteBox">
-            <div>
-                {props.content}
-            </div>
-            <div className="author">
-                -{props.author}
+            <div className="quote">
+                <div>
+                    {props.content}
+                </div>
+                <div className="author">
+                    -{props.author}
+                </div>
             </div>
         </div>
+        
     )
 }
