@@ -26,20 +26,13 @@
 }
 
 #searchIcon {
-  width: 10px;
+  width: 100%;
   height: 10px;
-  outline: none;
-  
 }
 
-.wrapper {
-  width: 100%;
-  text-align: center;
-  display: flex;
-}
-
-input {
-  border-radius: 20px;
-  width: 100%;
-  display: block;
+#wrapper {
+  display:flex;
+  flex-direction:row;
+  border:1px solid grey;
+  padding:1px;
 }

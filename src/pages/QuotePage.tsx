@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Quotebox } from "../components/Quotebox";
 import { Quote } from "../interfaces";
 import { Searchbar } from "../components/Searchbar";
-import { SearchButton } from "../components/SearchButton";
 import { Header } from "../components/Header";
 
 export function QuotePage() {
@@ -48,10 +47,7 @@ export function QuotePage() {
             { firstTime &&
             <div >
                 <Header />
-                <div className="wrapper">
-                    <Searchbar />
-                    <SearchButton />
-                </div>
+                <Searchbar />
                 <div>
                     <Quotebox author={quote.author} content={quote.content} _id={""} />
                 </div>
@@ -59,13 +55,8 @@ export function QuotePage() {
             }
             { !firstTime &&
                 <div>
-                    <div className="wrapper">
-                        <span>
-                        <Searchbar />
-                        <SearchButton />
-                        </span>
-                        
-                    </div>
+                    <Header />
+                    <Searchbar />
                     <div>
                         {
                             quoteList.map((quote) => {
