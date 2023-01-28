@@ -6,7 +6,7 @@ import { Header } from "../components/Header";
 
 export function QuotePage() {
     const [firstTime, setTime] = useState(true);
-    const [quote, setQuote] = useState<Quote>({author: "", content: "", _id: ""});
+    const [quote, setQuote] = useState<Quote>({ author: "", content: "", _id: "" });
     const [quoteList, setQuotes] = useState<Quote[]>([]);
 
     useEffect(() => {
@@ -17,14 +17,14 @@ export function QuotePage() {
                 const button = document.getElementById("searchButton") as HTMLInputElement;
                 button.click();
             }
-        const searchButton = document.getElementById("searchButton") as HTMLButtonElement;
-        searchButton.addEventListener("click", () => {
-            setTime(false);
-            getSearchedQuote()
+            const searchButton = document.getElementById("searchButton") as HTMLButtonElement;
+            searchButton.addEventListener("click", () => {
+                setTime(false);
+                getSearchedQuote()
             });
         });
     }, []);
-  
+
     async function getQuote() {
         let result = await fetch("https://usu-quotes-mimic.vercel.app/api/random")
             .then((res) => res.json());
@@ -32,28 +32,36 @@ export function QuotePage() {
     }
 
     async function getSearchedQuote() {
+        console.log("called");
         const queryHtml = document.getElementById("searchBar") as HTMLInputElement;
         const query = queryHtml.value;
-        if (query.trim() != "") {
-            let quotes = await fetch(`https://usu-quotes-mimic.vercel.app/api/search?query=${query}`)
+        let quotes = await fetch(`https://usu-quotes-mimic.vercel.app/api/search?query=${query}`)
             .then((res) => res.json())
-            .then((json) => json.results);
+            .then((json) => {
+                return json.results;
+            });
         setQuotes(quotes);
-        }
+        const searchBar = document.getElementById("searchBar") as HTMLInputElement;
+        searchBar.addEventListener("keypress", (event) => {
+            if (event.key === "Enter") {
+                const button = document.getElementById("searchButton") as HTMLInputElement;
+                button.click();
+            }
+        })
     }
-  
+
     return (
         <div className="firstTime">
-            { firstTime &&
-            <div >
-                <Header />
-                <Searchbar />
-                <div>
-                    <Quotebox author={quote.author} content={quote.content} _id={""} />
+            {firstTime &&
+                <div >
+                    <Header />
+                    <Searchbar />
+                    <div>
+                        <Quotebox author={quote.author} content={quote.content} _id={""} />
+                    </div>
                 </div>
-            </div>
             }
-            { !firstTime &&
+            {!firstTime &&
                 <div>
                     <Header />
                     <Searchbar />
@@ -62,14 +70,14 @@ export function QuotePage() {
                             quoteList.map((quote) => {
                                 return (
                                     <div key={quote._id}>
-                                        <Quotebox {...quote}/>
+                                        <Quotebox {...quote} />
                                     </div>
                                 )
                             })
-                        }   
+                        }
                     </div>
                 </div>
             }
         </div>
-      )
+    )
 }
