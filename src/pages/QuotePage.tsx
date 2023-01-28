@@ -32,7 +32,6 @@ export function QuotePage() {
     }
 
     async function getSearchedQuote() {
-        console.log("called");
         const queryHtml = document.getElementById("searchBar") as HTMLInputElement;
         const query = queryHtml.value;
         let quotes = await fetch(`https://usu-quotes-mimic.vercel.app/api/search?query=${query}`)
